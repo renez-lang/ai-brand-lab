@@ -1216,13 +1216,78 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; }
   margin-left: 12px;
   font-weight: 600;
 }
+
+/* ── DATE PICKER ────────────────────────────── */
+.date-picker {
+  margin-bottom: 32px;
+}
+
+.date-picker__label {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.date-picker__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.date-pill {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(199,117,48,0.35);
+  color: var(--greige);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.date-pill:hover {
+  border-color: var(--brass);
+  color: var(--white);
+}
+
+.date-pill.is-active {
+  background: var(--brass);
+  border-color: var(--brass);
+  color: var(--white);
+}
+
+.price-strike {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: line-through;
+  margin-right: 14px;
+  font-weight: 400;
+}
+
+.sale-badge {
+  display: inline-block;
+  background: var(--brass);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  margin-bottom: 20px;
+}
 </style>
 </head>
 <body>
 
 <div class="announce-bar">
-  Next cohort: Tuesday July 7 · 12PM Pacific · Only a few spots available
-  <a href="#register">Reserve Your Spot →</a>
+  <span id="announce-next-date">Next cohort: Tuesday, July 7 · 12PM Pacific</span> · Only a few spots per session
+  <a href="#register">Pick Your Date →</a>
 </div>
 
 <!-- ── HERO ───────────────────────────────────────── -->
@@ -1234,7 +1299,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; }
 
   <div class="hero__body">
     <div class="hero__content">
-      <div class="hero__eyebrow">July 7 · 12PM Pacific · A 3-Hour Live Brand Clarity Cohort</div>
+      <div class="hero__eyebrow">Live Tues &amp; Thurs · 12PM Pacific · A 3-Hour Live Brand Clarity Cohort</div>
       <h1 class="hero__headline">
         Your brand<br>
         <em>already exists.</em><br>
@@ -1248,9 +1313,9 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; }
         No templates that feel like someone else's life.
       </p>
       <div class="hero__cta-group">
-        <a href="#register" class="btn-primary">Join the AI Brand Lab — $299</a>
+        <a href="#register" class="btn-primary">Join the AI Brand Lab — <span id="hero-price">$299</span></a>
         <a href="#what" class="btn-secondary">See what's inside ↓</a>
-        <p class="hero__price-note">July 7 · 12PM Pacific · Small group · Designer-ready deliverable</p>
+        <p class="hero__price-note">Tues &amp; Thurs · 12PM Pacific · Small group · Designer-ready deliverable</p>
       </div>
     </div>
   </div>
@@ -1595,13 +1660,19 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; }
       to show people what that work actually looks like.
     </p>
 
+    <div class="date-picker" id="date-picker">
+      <div class="date-picker__label">Choose Your Session</div>
+      <div class="date-picker__pills" id="date-pills"></div>
+    </div>
+
+    <div class="sale-badge" id="sale-badge" style="display:none;">This Week Only · Sale Ends July 10</div>
     <div class="cta-section__price-block">
-      <div class="cta-section__price">$299</div>
-      <div class="cta-section__price-note">Tuesday July 7 · 12PM Pacific · Live with Renez</div>
+      <div class="cta-section__price" id="cta-price-display">$299</div>
+      <div class="cta-section__price-note"><span id="selected-date-label">Tuesday, July 7</span> · 12PM Pacific · Live with Renez</div>
     </div>
 
     <ul class="cta-section__includes">
-      <li>3-hour live cohort with Renez — Tuesday July 7 at 12PM Pacific</li>
+      <li>3-hour live cohort with Renez — <span id="selected-date-includes">Tuesday, July 7</span> at 12PM Pacific</li>
       <li>AI Brand Lab™ Workbook (Google Doc)</li>
       <li>3 custom GPT sessions built for this process</li>
       <li>Brand Identity Blueprint™ Canva template</li>
@@ -1609,7 +1680,7 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; }
       <li>Access to all AI tools covered in the session</li>
     </ul>
 
-    <a href="https://buy.stripe.com/5kQ7sEf6g5Pk5WzbuUgw000" class="cta-btn" target="_blank">Reserve My Spot Now</a>
+    <a href="https://buy.stripe.com/9B6cMY1fqgtYgBd9mMgw001" class="cta-btn" target="_blank">Reserve My Spot Now</a>
     <br>
     <p class="cta-guarantee">Questions? DM @renez_rizing or email renez@consciousconsultings.com</p>
   </div>
@@ -1650,6 +1721,104 @@ h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; }
   <div class="footer__logo">AI Brand Lab™ · Renez Bernal · Conscious Consulting</div>
   <p class="footer__sub">consciousconsultings.com · @renez_rizing · © 2026 Conscious Consulting. All rights reserved.</p>
 </footer>
+
+<!-- ── COHORT DATE ENGINE ─────────────────────────── -->
+<!-- Auto-generates the next upcoming Tuesday/Thursday 12PM Pacific sessions.
+     No manual date edits needed — this recalculates every time the page loads.
+     To change the cadence (e.g. add a third weekly day), edit the `targetDays` array below. -->
+<script>
+(function () {
+  var targetDays = [2, 4]; // 2 = Tuesday, 4 = Thursday
+  var sessionCount = 6;
+
+  // ── SALE PRICING ──────────────────────────────────
+  // Display-only: the Reserve/CTA buttons still link to the existing $299
+  // Stripe payment link. This just swaps the on-page price copy while the
+  // sale is active, then reverts to $299 automatically after saleEndDate.
+  // To run a future sale, update salePrice and saleEndDate below.
+  var salePrice = 224;
+  var regularPrice = 299;
+  var saleEndDate = new Date(2026, 6, 11); // sale active through end of day July 10, 2026 (local time)
+  var isSaleActive = new Date() < saleEndDate;
+
+  function getUpcomingSessions(count) {
+    var sessions = [];
+    var d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + 1); // start tomorrow so a same-day session never shows as "upcoming"
+    while (sessions.length < count) {
+      if (targetDays.indexOf(d.getDay()) !== -1) {
+        sessions.push(new Date(d));
+      }
+      d.setDate(d.getDate() + 1);
+    }
+    return sessions;
+  }
+
+  function formatLong(date) {
+    return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  }
+
+  function formatShort(date) {
+    return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  }
+
+  function selectSession(longLabel, pillEl) {
+    var pills = document.querySelectorAll('.date-pill');
+    for (var i = 0; i < pills.length; i++) { pills[i].classList.remove('is-active'); }
+    pillEl.classList.add('is-active');
+
+    var priceNoteEl = document.getElementById('selected-date-label');
+    var includesEl = document.getElementById('selected-date-includes');
+    if (priceNoteEl) priceNoteEl.textContent = longLabel;
+    if (includesEl) includesEl.textContent = longLabel;
+  }
+
+  function applySalePricing(firstLong) {
+    var heroPriceEl = document.getElementById('hero-price');
+    var ctaPriceEl = document.getElementById('cta-price-display');
+    var saleBadgeEl = document.getElementById('sale-badge');
+    var announceEl = document.getElementById('announce-next-date');
+
+    if (isSaleActive) {
+      if (heroPriceEl) heroPriceEl.textContent = '$' + salePrice;
+      if (ctaPriceEl) ctaPriceEl.innerHTML = '<span class="price-strike">$' + regularPrice + '</span>$' + salePrice;
+      if (saleBadgeEl) saleBadgeEl.style.display = 'inline-block';
+      if (announceEl) announceEl.textContent = 'This week only: $' + salePrice + ' (reg. $' + regularPrice + ') · Sale ends July 10';
+    } else {
+      if (heroPriceEl) heroPriceEl.textContent = '$' + regularPrice;
+      if (ctaPriceEl) ctaPriceEl.textContent = '$' + regularPrice;
+      if (saleBadgeEl) saleBadgeEl.style.display = 'none';
+      if (announceEl) announceEl.textContent = 'Next cohort: ' + firstLong + ' · 12PM Pacific';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var sessions = getUpcomingSessions(sessionCount);
+    var pillContainer = document.getElementById('date-pills');
+    if (!pillContainer || !sessions.length) return;
+
+    sessions.forEach(function (date, i) {
+      var longLabel = formatLong(date);
+      var pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'date-pill' + (i === 0 ? ' is-active' : '');
+      pill.textContent = formatShort(date);
+      pill.setAttribute('aria-label', 'Select ' + longLabel + ' at 12PM Pacific');
+      pill.addEventListener('click', function () { selectSession(longLabel, pill); });
+      pillContainer.appendChild(pill);
+    });
+
+    var firstLong = formatLong(sessions[0]);
+    var priceNoteEl = document.getElementById('selected-date-label');
+    var includesEl = document.getElementById('selected-date-includes');
+    if (priceNoteEl) priceNoteEl.textContent = firstLong;
+    if (includesEl) includesEl.textContent = firstLong;
+
+    applySalePricing(firstLong);
+  });
+})();
+</script>
 
 </body>
 </html>
